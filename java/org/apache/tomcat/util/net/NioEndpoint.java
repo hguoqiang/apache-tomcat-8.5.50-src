@@ -265,6 +265,7 @@ public class NioEndpoint extends AbstractJsseEndpoint<NioChannel> {
             initializeConnectionLatch();
 
             // Start poller threads
+            //poller 线程 检查 nio 中的selector 是否准备好 读或者写
             pollers = new Poller[getPollerThreadCount()];
             for (int i=0; i<pollers.length; i++) {
                 pollers[i] = new Poller();
@@ -274,6 +275,7 @@ public class NioEndpoint extends AbstractJsseEndpoint<NioChannel> {
                 pollerThread.start();
             }
 
+            //Acceptor 线程监听socket连接
             startAcceptorThreads();
         }
     }
